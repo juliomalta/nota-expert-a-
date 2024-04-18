@@ -31,4 +31,5 @@ Quarto:
 Refinações: 
 1.Voltar estado: dentro do add-note, em handleSaveNote, reseto o conteúdo quando clicarem no botão, e volto para o estado true, para escolherem qual forma da nota. Pra isso preciso colocar no <textarea> value = {content}, que faz com que o textarea não só atualize o estado mas também seja atualizado.
 
-2. Salvar na localstorage:
+2. Salvar na localstorage: Colocar dentro do app, dentro do handleAddNote, um localStorage.setItem('notes', JSON.stringify( o array de notas ))
+2.1 Acessar essa localstorage e devolver para o aplicativo o conteúdo: no useState dentro do App, passei o generics que recebe um array de nota, mas declarei que ele começa com um array vazio em: ([]) ; Pra acessar e recuperar essas notas da storage, preciso substituir esse array vazio por uma a.func, que tem dentro uma constante, que armazena as notas de dentro do localStorage, através de um localStorage.getItem, e dentro uma condicional, se tiver nota, return JSON.parse(localNotes). O parse é o caminho inverso do stringify. Se não tiver, retorna um array vazio
