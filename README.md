@@ -33,3 +33,10 @@ Refinações:
 
 2. Salvar na localstorage: Colocar dentro do app, dentro do handleAddNote, um localStorage.setItem('notes', JSON.stringify( o array de notas ))
 2.1 Acessar essa localstorage e devolver para o aplicativo o conteúdo: no useState dentro do App, passei o generics que recebe um array de nota, mas declarei que ele começa com um array vazio em: ([]) ; Pra acessar e recuperar essas notas da storage, preciso substituir esse array vazio por uma a.func, que tem dentro uma constante, que armazena as notas de dentro do localStorage, através de um localStorage.getItem, e dentro uma condicional, se tiver nota, return JSON.parse(localNotes). O parse é o caminho inverso do stringify. Se não tiver, retorna um array vazio
+
+3. Implementar o search: como quero observar uma informação, através de um input do usuário, preciso utilizar então um estado, [search, setSearch] que vem de uma string vazia.
+Passo um onChange no input do form, que recebe a função handleSearch.
+*** Lembrando apenas que, quando uma função recebe um evento, precisa de tipagem, então eu vejo na descrição da propriedade que quero passar a função (neste caso onChange), o que vem antes do Handler, neste caso, ChangeEvent. E o ChangeEvent em si, precisa do generics especificando o que vai vir.
+Dentro do handleSearch, atualizo o valor da search pelo conteúdo do usuário: setSearch(event.target.value)
+Em seguida, uma constante pra armazenar as notas pesquisadas/filtradas, junto da condicional: se tiver conteúdo na searchbar, devolver o valor procurado, se não, todas as notas.
+*** Lembrar de atualizar então o map feito dentro da função principal para o filteredNotes, já que criamos a condicional.
