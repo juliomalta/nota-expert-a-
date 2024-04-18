@@ -3,7 +3,11 @@ import { X } from 'lucide-react'
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { toast } from 'sonner'
 
-export default function AddNote() {
+interface AddNoteProps {
+  handleAddNote: (content: string) => void
+}
+
+export default function AddNote({handleAddNote}: AddNoteProps) {
   const [shouldShowWelcome, setShouldShowWelcome] = useState(true)
   const [content, setContent] = useState('')
 
@@ -23,7 +27,10 @@ export default function AddNote() {
   function handleSaveNote(event: FormEvent) {
     event.preventDefault()
 
-    console.log(content)
+    handleAddNote(content)
+
+    setContent('')
+    setShouldShowWelcome(true)
 
     toast.success('Nota salva com sucesso!')
 
@@ -55,7 +62,9 @@ export default function AddNote() {
                 <textarea 
                   onChange={handleContentChange}
                   autoFocus
-                  className='h-1/2 bg-transparent text-slate-400 resize-none outline-none' placeholder='Digite sua nota aqui...' />
+                  className='h-1/2 bg-transparent text-slate-400 resize-none outline-none' placeholder='Digite sua nota aqui...' 
+                  value={content}
+                  />
               )}
             </div>
               <button 

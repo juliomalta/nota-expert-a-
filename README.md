@@ -19,4 +19,16 @@ A *handleContentChange* eu recebo as informações/mudanças de estado do form. 
 O handleSaveNote recebe como parâmetro event:FormEvent. Lembrar de colocar event.preventDefault() para não recarregar a página ao clicar no botão submit, e salva o conteúdo digitado.
 Instalei o sonner para controlar os toaster, importo e coloco abaixo do App em main.tsx
 
+Terceiro: Preciso receber as informações das notas salvas, e dentro do app, pra fazer a alteração de estado, criei a const [notes, setNotes] = useState([]), ou seja, um array com as notas, contendo id, date e content cada. E chamo as notas com um map que percorre esse array e retorna um <Card> com os dados todos (e uma key, obrigatória em mapping).
+Agora preciso acessar esse setNotes dentro do add-note, ou seja, salvar a nota em si criada.
+Pra isso, criei uma função handleAddNote que recebe (content: string), e dentro possui uma const newNote, com suas propriedades, no final apenas content (que virá do add-note) e um setNotes([newNote, ...notes]) que adiciona a nota seguida das outras já possuídas. Após isso, designo a função como algo a ser recebido do <AddNote> através de handleAddNote={handleAddNote}
+Dentro do add-note, por ter colocado que ele tem que passar essas informações, criei uma interface dele, que passe handleAddNote: (content: string) => void;
+Dentro da função principal, coloquei a tipagem {handleAddNote}: AddNoteProps e dentro da função handleSaveNote, chamei a função que recebe o conteúdo, handleAddNote(content), que agora será renderizado no app, terminando assim a integração do add note (uma forma de comunicação básica entre componente pai e filho ou filho e pai).
+Dentro do App, eu passei a tipagem do useState através de generics, <Note[]>, de uma interface Note que criei para especificar.
 
+Quarto:
+
+Refinações: 
+1.Voltar estado: dentro do add-note, em handleSaveNote, reseto o conteúdo quando clicarem no botão, e volto para o estado true, para escolherem qual forma da nota. Pra isso preciso colocar no <textarea> value = {content}, que faz com que o textarea não só atualize o estado mas também seja atualizado.
+
+2. Salvar na localstorage:

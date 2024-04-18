@@ -4,6 +4,7 @@ import {ptBR} from 'date-fns/locale'
 import { X } from 'lucide-react'
 
 interface CardProps {
+  id: string
   content: string
   date: Date
 }
@@ -15,7 +16,7 @@ export function Card(props: CardProps) {
       <Dialog.Trigger className='flex flex-col text-left outline-none bg-slate-800 overflow-hidden rounded-md p-5 gap-3 relative hover:ring-2 hover:ring-green-600 focus-visible:ring-2 focus-visible:ring-lime-500'>
         {/* o hover:ring-2 adiciona um anel de 2px ao redor do elemento quando o mouse passa por cima, sem que a borda ocupe espaço e mova as divs ao redor. */}
         {/* para que o conteúdo do button fique alinhado a esquerda e no topo, tem que colocar o flex-col e o text-left. Lembrando que o space-y-valor funciona apenas para quando o display é grid. Tem que usar então o gap-valor. */}
-        <span className='text-sm font-medium text-slate-300'>{props.date.toISOString()}</span>
+        <span className='text-sm font-medium text-slate-300'> {formatDistanceToNow(props.date, { locale: ptBR, addSuffix: true})}</span>
         <p className='text-sm leading-6 text-slate-400 '>{props.content}</p>
         <div className='absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/60 to-black/0 pointer-events-none' /> 
         {/* // um degradê de preto para transparente no eixo y. */}
