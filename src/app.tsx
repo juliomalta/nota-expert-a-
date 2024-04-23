@@ -42,10 +42,8 @@ export default function App() {
   }
   
   function handleSearch(event: ChangeEvent<HTMLInputElement>) {
-    setSearch(event.target.value)
-
-    // const query = event.target.value
-    // setSearch(query)
+    const query = event.target.value
+    setSearch(query)
   }
 
   const filteredNotes = search !== '' 
