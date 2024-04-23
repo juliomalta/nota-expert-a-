@@ -40,6 +40,13 @@ export default function App() {
     // }
     // setNotes([...notes, newNote])
   }
+
+  function handleDeleteNote(id: string) {
+    const notesArray = notes.filter(note => note.id !== id)
+    setNotes(notesArray)
+
+    localStorage.setItem('notes', JSON.stringify(notesArray))
+  }
   
   function handleSearch(event: ChangeEvent<HTMLInputElement>) {
     const query = event.target.value
@@ -53,7 +60,7 @@ export default function App() {
     // Lembrar de tratar a string para lowercase, para que a busca não seja case sensitive.
 
   return (
-    <div className='mx-auto max-w-6xl my-12 space-y-6'> 
+    <div className='mx-auto max-w-6xl my-12 space-y-6 px-5'> 
     {/* o space-y-6 é um espaçamento entre todos os elementos do eixo y de dentro da div. */}
       <img src={logo} alt='Logo' height={80} width={80}/>
       <form className='w-full '>
@@ -68,11 +75,11 @@ export default function App() {
       <div className='h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent' /> 
       {/* uma linha horizontal de 1px de altura. */}
 
-      <div className='grid grid-cols-3 gap-6 auto-rows-[16rem]'> 
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[16rem]'> 
       {/* grid com 3 colunas e altura de 250px. */}
         <AddNote handleAddNote={handleAddNote} />
         {filteredNotes.map(note => {
-          return <Card key={note.id} id={note.id} date={note.date} content={note.content} />
+          return <Card key={note.id} id={note.id} date={note.date} content={note.content} onDelete={handleDeleteNote}/>
         })}
         
       </div>

@@ -7,8 +7,10 @@ interface CardProps {
   id: string
   content: string
   date: Date
+  onDelete: (id: string) => void
 }
 // Quais são as informações que serão diferentes de uma nota para a outra? O conteúdo e a data.
+
 
 export function Card(props: CardProps) {
   return (
@@ -35,6 +37,7 @@ export function Card(props: CardProps) {
               {props.content}</p>
           </div>
             <button 
+              onClick={() => props.onDelete(props.id)}
               type='button' 
               className='text-center text-sm py-4 w-full font-semibold bg-slate-800 text-slate-300 outline-none group'>
                 Deseja <span className='text-rose-400 group-hover:underline'>apagar permanentemente</span>?</button>
